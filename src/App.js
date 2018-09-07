@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Camera from 'react-html5-camera-photo';
+import Scanner from './Scanner';
+import Result from './Result';
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,15 +10,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null
+      file: null,
+      scanning: false,
+      results: []
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this._onDetected = this._onDetected.bind(this);
+    this._scan = this._scan.bind(this);
   }
 
   handleInputChange(evt) {
     // console.log(this.fileUpload.files[0]);
     this.setState({
-      file: URL.createObjectURL(this.fileUpload.files[0])
+      file: URL.createObjectURL(this.fileUpload.files[0]),
     })
   }
 
@@ -39,8 +45,23 @@ class App extends Component {
           {/*/>*/}
         </p>
         <div><img src={this.state.file}/></div>
+        <div>
+          <button onClick={this._scan}>{this.state.scanning ? 'Stop' : 'Start'}</button>
+          <ul className="results">
+            {this.state.results.map((result) => (<Result key={result.codeResult.code} result={result} />))}
+          </ul>
+          {this.state.scanning ? <Scanner onDetected={this._onDetected}/> : null}
+        </div>
       </div>
     );
+  }
+
+  _scan() {
+    this.setState({scanning: !this.state.scanning});
+  }
+
+  _onDetected(result) {
+    this.setState({results: this.state.results.concat([result])});
   }
 }
 
