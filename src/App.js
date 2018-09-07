@@ -4,6 +4,22 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: null
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(evt) {
+    // console.log(this.fileUpload.files[0]);
+    this.setState({
+      file: URL.createObjectURL(this.fileUpload.files[0])
+    })
+  }
+
   onTakePhoto (dataUri) {
     // Do stuff with the dataUri photo...
     console.log(`takePhoto: ${dataUri}`);
@@ -14,14 +30,15 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Adept Image Search</h1>
         </header>
         <p className="App-intro">
-          <input type="file" accept="image/*" capture="camera" />
+          <input onChange={this.handleInputChange} ref={(ref) => this.fileUpload = ref} type="file" accept="image/*" capture="camera" />
           {/*<Camera*/}
               {/*onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }*/}
           {/*/>*/}
         </p>
+        <div><img src={this.state.file}/></div>
       </div>
     );
   }
