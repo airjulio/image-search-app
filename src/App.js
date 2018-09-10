@@ -36,12 +36,12 @@ class App extends Component {
 
     navigator.mediaDevices.getUserMedia(constraints)
         .then(function(mediaStream) {
-          // var video = document.querySelector('video');
-          // video.srcObject = mediaStream;
-          // video.onloadedmetadata = function(e) {
-          //   video.play();
-          // };
-          this._scan;
+          var video = document.querySelector('video');
+          video.srcObject = mediaStream;
+          video.onloadedmetadata = function(e) {
+            video.play();
+          };
+          this._scan();
         })
         .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
   }
