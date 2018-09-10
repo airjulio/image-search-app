@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   barcodeRequest(img) {
-    this.setState({ barCodeResult: '' });
+    this.setState({ barCodeResult: 'Analysing image...' });
     const formData = new FormData();
     formData.append('file', img);
     fetch('https://imagesearch.adeptmind.ai/barcode', {
