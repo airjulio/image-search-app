@@ -31,6 +31,21 @@ class App extends Component {
     console.log(`takePhoto: ${dataUri}`);
   }
 
+  askForMediaAccess() {
+    const constraints = { audio: true, video: { width: 1280, height: 720 } };
+
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then(function(mediaStream) {
+          // var video = document.querySelector('video');
+          // video.srcObject = mediaStream;
+          // video.onloadedmetadata = function(e) {
+          //   video.play();
+          // };
+          this._scan;
+        })
+        .catch(function(err) { console.log(err.name + ": " + err.message); }); // always check for errors at the end.
+  }
+
   render() {
     return (
       <div className="App">
@@ -44,9 +59,9 @@ class App extends Component {
               {/*onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }*/}
           {/*/>*/}
         </p>
-        <div><img src={this.state.file}/></div>
+        <div><img className="App-picture" src={this.state.file}/></div>
         <div>
-          <button onClick={this._scan}>{this.state.scanning ? 'Stop' : 'Start'}</button>
+          <button onClick={this.askForMediaAccess}>{this.state.scanning ? 'Stop' : 'Start'}</button>
           <ul className="results">
             {this.state.results.map((result) => (<Result key={result.codeResult.code} result={result} />))}
           </ul>
@@ -61,6 +76,7 @@ class App extends Component {
   }
 
   _onDetected(result) {
+    console.log(`ON DETECT STATE: ${this.state.results}`);
     this.setState({results: this.state.results.concat([result])});
   }
 }

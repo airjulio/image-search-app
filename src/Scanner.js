@@ -2,9 +2,11 @@ import React from 'react';
 import Quagga from 'quagga';
 
 export default class App extends React.Component {
-  // propTypes: {
-  //   onDetected: React.PropTypes.func.isRequired
-  // },
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
         <div id="interactive" className="viewport"/>
@@ -30,7 +32,7 @@ export default class App extends React.Component {
         readers : [ "code_128_reader"]
       },
       locate: true
-    }, function(err) {
+    }, (err) => {
       if (err) {
         return console.log(err);
       }

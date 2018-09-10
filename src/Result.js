@@ -1,9 +1,10 @@
 import React from 'react';
 
 export default class App extends React.Component {
-  // propTypes: {
-  //   result: React.PropTypes.object
-  // },
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const result = this.props.result;
 
