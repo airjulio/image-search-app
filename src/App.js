@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   barcodeRequest(img) {
+    this.setState({ barCodeResult: '' });
     const formData = new FormData();
     formData.append('file', img);
     fetch('https://imagesearch.adeptmind.ai/barcode', {
@@ -80,9 +81,6 @@ class App extends Component {
             accept="image/*"
             capture="camera"
           />
-          {/*<Camera*/}
-          {/*onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }*/}
-          {/*/>*/}
         </p>
         <div>
           <img className="App-picture" src={this.state.file} />
@@ -90,19 +88,6 @@ class App extends Component {
         <div>
           <p>{this.state.barCodeResult}</p>
         </div>
-        {/*<div>*/}
-          {/*<button onClick={this._scan}>*/}
-            {/*{this.state.scanning ? 'Stop' : 'Start'}*/}
-          {/*</button>*/}
-          {/*<ul className="results">*/}
-            {/*{this.state.results.map((result) => (*/}
-              {/*<Result key={result.codeResult.code} result={result} />*/}
-            {/*))}*/}
-          {/*</ul>*/}
-          {/*{this.state.scanning ? (*/}
-            {/*<Scanner onDetected={this._onDetected} />*/}
-          {/*) : null}*/}
-        {/*</div>*/}
       </div>
     );
   }
