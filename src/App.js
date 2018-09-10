@@ -5,6 +5,12 @@ import Result from './Result';
 import logo from './logo.svg';
 import './App.css';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBarcode } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faBarcode);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -75,12 +81,16 @@ class App extends Component {
         </header>
         <p className="App-intro">
           <input
+              id="barcode-upload"
             onChange={this.handleInputChange}
             ref={(ref) => (this.fileUpload = ref)}
             type="file"
             accept="image/*"
             capture="camera"
+            className="inputfile"
           />
+          {/*<label htmlFor="file"><FontAwesomeIcon icon="barcode" /></label>*/}
+          <label className="barcodeIcon" for="barcode-upload"><FontAwesomeIcon icon="barcode" /></label>
         </p>
         <div>
           <img className="App-picture" src={this.state.file} />
