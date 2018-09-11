@@ -16,6 +16,7 @@
 
 .App-title {
   font-size: 1.5em;
+  color: aqua;
 }
 
 .App-intro {
@@ -29,6 +30,7 @@
 
 .barcodeIcon {
   font-size:48px;
+  color: darkmagenta;
 }
 
 .inputfile {

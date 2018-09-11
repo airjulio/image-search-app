@@ -7,7 +7,7 @@ import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarcode } from '@fortawesome/free-solid-svg-icons';
+import { faBarcode, faTshirt } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faBarcode);
 
@@ -18,17 +18,51 @@ class App extends Component {
       file: null,
       scanning: false,
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBarcodeChange = this.handleBarcodeChange.bind(this);
     this._onDetected = this._onDetected.bind(this);
     this._scan = this._scan.bind(this);
   }
 
-  handleInputChange(evt) {
+  handleBarcodeChange(evt) {
     this.barcodeRequest(this.fileUpload.files[0]);
     this.setState({
       file: URL.createObjectURL(this.fileUpload.files[0]),
     });
   }
+
+  handlePicChange(evt) {
+    this.pictureService(this.fileUpload.files[0], 'https://imagesearch.adeptmind.ai/image');
+    this.setState({
+      file: URL.createObjectURL(this.fileUpload.files[0]),
+    });
+  }
+
+  showBarcode(response) {
+    response.json().then((body) => {
+      console.log(`BODY: ${JSON.stringify(body)}`);
+      this.setState({ barCodeResult: body.result });
+    })
+  }
+
+  pictureService(img, url, callback) {
+    this.setState({ barCodeResult: 'Analysing image...' });
+    const formData = new FormData();
+    formData.append('file', img);
+    fetch(url, {
+      // fetch('http://localhost:5000/barcode', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      body: formData,
+    })
+        .then((response) =>
+            response.json().then((body) => {
+              console.log(`BODY: ${JSON.stringify(body)}`);
+              this.setState({ barCodeResult: body.result });
+            }),
+        )
+        .catch((error) => console.error('Error:', error));
+  }
+
 
   barcodeRequest(img) {
     this.setState({ barCodeResult: 'Analysing image...' });
@@ -82,15 +116,25 @@ class App extends Component {
         <p className="App-intro">
           <input
               id="barcode-upload"
-            onChange={this.handleInputChange}
+            onChange={this.handleBarcodeChange}
             ref={(ref) => (this.fileUpload = ref)}
             type="file"
             accept="image/*"
             capture="camera"
             className="inputfile"
           />
-          {/*<label htmlFor="file"><FontAwesomeIcon icon="barcode" /></label>*/}
           <label className="barcodeIcon" for="barcode-upload"><FontAwesomeIcon icon="barcode" /></label>
+
+          <input
+              id="picture-upload"
+              onChange={this.handlePicChange}
+              ref={(ref) => (this.fileUpload = ref)}
+              type="file"
+              accept="image/*"
+              capture="camera"
+              className="inputfile"
+          />
+          <label className="shirtIcon" htmlFor="picture-upload"><FontAwesomeIcon icon="tshirt"/></label>
         </p>
         <div>
           <img className="App-picture" src={this.state.file} />
