@@ -59,7 +59,7 @@ class App extends Component {
     console.log('HERE', this);
     response.json().then((body) => {
       console.log('BODY', body);
-      this.setState(()=>({ pictureResult: body.result }));
+      this.setState({ pictureResult: body.result });
     });
   }
 
@@ -90,7 +90,7 @@ class App extends Component {
       .then((response) =>
         response.json().then((body) => {
           console.log(`BODY: ${JSON.stringify(body)}`);
-          this.setState(() => ({ barCodeResult: body.result }));
+          this.setState({ barCodeResult: body.result });
         }),
       )
       .catch((error) => console.error('Error:', error));
