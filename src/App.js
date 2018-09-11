@@ -64,7 +64,7 @@ class App extends Component {
   }
 
   pictureService(img, url, callback) {
-    this.setState({ pictureResult: 'Analysing image...' });
+    this.setState({ pictureResult: 'Analyzing image...' });
     const formData = new FormData();
     formData.append('file', img);
     fetch(url, {
@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   barcodeRequest(img) {
-    this.setState({ barCodeResult: 'Analysing image...' });
+    this.setState({ barCodeResult: 'Analyzing image...' });
     const formData = new FormData();
     formData.append('file', img);
     fetch('https://imagesearch.adeptmind.ai/barcode', {
@@ -173,9 +173,9 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        <div>
-          {this.showResult()}
-        </div>
+        {/*<div>*/}
+          {/*{this.showResult()}*/}
+        {/*</div>*/}
       </div>
     );
   }
