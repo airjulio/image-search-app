@@ -123,17 +123,17 @@ class App extends Component {
     console.log('state', {
         ...this.state
     });
-    // if (this.state.barCodeResult) {
-    //   return (<p>{this.state.barcodeResult}</p>);
-    // } else if (this.state.pictureResult) {
-    //   return (
-    //       <ul>
-    //         {this.state.pictureResult.map(item => {
-    //           return <li>{item}</li>
-    //         })}
-    //       </ul>
-    //   );
-    // }
+    if (this.state.barCodeResult) {
+      return (<p>{this.state.barcodeResult}</p>);
+    } else if (this.state.pictureResult) {
+      return (
+          <ul>
+            {this.state.pictureResult.map(item => {
+              return <li>{item}</li>
+            })}
+          </ul>
+      );
+    }
   }
 
   render() {
