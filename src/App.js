@@ -97,7 +97,7 @@ class App extends Component {
     fetch('https://imagesearch.adeptmind.ai/barcodeSearch', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
-      body: {'barcode': barcodeStr},
+      body: JSON.stringify({'barcode': barcodeStr}),
     })
         .then((response) =>
             response.json().then((body) => {
