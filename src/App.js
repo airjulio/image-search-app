@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarcode, faTshirt } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faBarcode);
+library.add(faTshirt);
 
 class App extends Component {
   constructor(props) {
@@ -31,7 +32,11 @@ class App extends Component {
   }
 
   handlePicChange(evt) {
-    this.pictureService(this.fileUpload.files[0], 'https://imagesearch.adeptmind.ai/image');
+    this.pictureService(
+      this.fileUpload.files[0],
+      'https://imagesearch.adeptmind.ai/image',
+      this.showBarcode,
+    );
     this.setState({
       file: URL.createObjectURL(this.fileUpload.files[0]),
     });
@@ -41,7 +46,7 @@ class App extends Component {
     response.json().then((body) => {
       console.log(`BODY: ${JSON.stringify(body)}`);
       this.setState({ barCodeResult: body.result });
-    })
+    });
   }
 
   pictureService(img, url, callback) {
@@ -54,15 +59,9 @@ class App extends Component {
       mode: 'cors', // no-cors, cors, *same-origin
       body: formData,
     })
-        .then((response) =>
-            response.json().then((body) => {
-              console.log(`BODY: ${JSON.stringify(body)}`);
-              this.setState({ barCodeResult: body.result });
-            }),
-        )
-        .catch((error) => console.error('Error:', error));
+      .then((response) => callback(response))
+      .catch((error) => console.error('Error:', error));
   }
-
 
   barcodeRequest(img) {
     this.setState({ barCodeResult: 'Analysing image...' });
@@ -115,7 +114,7 @@ class App extends Component {
         </header>
         <p className="App-intro">
           <input
-              id="barcode-upload"
+            id="barcode-upload"
             onChange={this.handleBarcodeChange}
             ref={(ref) => (this.fileUpload = ref)}
             type="file"
@@ -123,18 +122,22 @@ class App extends Component {
             capture="camera"
             className="inputfile"
           />
-          <label className="barcodeIcon" for="barcode-upload"><FontAwesomeIcon icon="barcode" /></label>
+          <label className="barcodeIcon" htmlFor="barcode-upload">
+            <FontAwesomeIcon icon="barcode" />
+          </label>
 
           <input
-              id="picture-upload"
-              onChange={this.handlePicChange}
-              ref={(ref) => (this.fileUpload = ref)}
-              type="file"
-              accept="image/*"
-              capture="camera"
-              className="inputfile"
+            id="picture-upload"
+            onChange={this.handlePicChange}
+            ref={(ref) => (this.fileUpload = ref)}
+            type="file"
+            accept="image/*"
+            capture="camera"
+            className="inputfile"
           />
-          <label className="shirtIcon" htmlFor="picture-upload"><FontAwesomeIcon icon="tshirt"/></label>
+          <label className="shirtIcon" htmlFor="picture-upload">
+            <FontAwesomeIcon icon="tshirt" />
+          </label>
         </p>
         <div>
           <img className="App-picture" src={this.state.file} />
