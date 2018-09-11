@@ -31,9 +31,10 @@ class App extends Component {
   }
 
   handleBarcodeChange(evt) {
-    this.barcodeRequest(this.fileUpload.files[0]);
+    const file = this.fileUpload.files[0];
+    this.barcodeRequest(file);
     this.setState({
-      file: URL.createObjectURL(this.fileUpload.files[0]),
+      file: URL.createObjectURL(file),
     });
   }
 
@@ -89,7 +90,7 @@ class App extends Component {
     })
       .then((response) =>
         response.json().then((body) => {
-          console.log(`BODY: ${JSON.stringify(body)}`);
+          console.log('body', body);
           this.setState({ barCodeResult: body.result });
         }),
       )
