@@ -56,7 +56,7 @@ class App extends Component {
   showPicture(response) {
     response.json().then((body) => {
       console.log(`BODY: ${JSON.stringify(body)}`);
-      this.setState({ pictureResult: Array.from(body.result) });
+      this.setState(()=>({ pictureResult: body.result }));
     });
   }
 
@@ -120,9 +120,6 @@ class App extends Component {
     if (this.state.barCodeResult) {
       return (<p>{this.state.barcodeResult}</p>);
     } else if (this.state.pictureResult) {
-      // return (
-      //     <p>{this.state.pictureResult}</p>
-      // );
       return (
           <ul>
             {this.state.pictureResult.map(item => {
