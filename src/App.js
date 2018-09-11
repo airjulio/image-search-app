@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   handleBarcodeChange(evt) {
-    const file = this.fileUpload.files[0];
+    const file = this.barUpload.files[0];
     this.barcodeRequest(file);
     this.setState({
       file: URL.createObjectURL(file),
@@ -40,12 +40,12 @@ class App extends Component {
 
   handlePicChange(evt) {
     this.pictureService(
-      this.fileUpload.files[0],
+      this.barUpload.files[0],
       'https://imagesearch.adeptmind.ai/image',
       this.showPicture,
     );
     this.setState({
-      file: URL.createObjectURL(this.fileUpload.files[0]),
+      file: URL.createObjectURL(this.barUpload.files[0]),
     });
   }
 
@@ -148,7 +148,7 @@ class App extends Component {
           <input
             id="barcode-upload"
             onChange={this.handleBarcodeChange}
-            ref={(ref) => (this.fileUpload = ref)}
+            ref={(ref) => (this.barUpload = ref)}
             type="file"
             accept="image/*"
             capture="camera"
@@ -161,7 +161,7 @@ class App extends Component {
           <input
             id="picture-upload"
             onChange={this.handlePicChange}
-            ref={(ref) => (this.fileUpload = ref)}
+            ref={(ref) => (this.picUpload = ref)}
             type="file"
             accept="image/*"
             capture="camera"
@@ -174,9 +174,9 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        {/*<div>*/}
-          {/*{this.showResult()}*/}
-        {/*</div>*/}
+        <div>
+          {this.showResult()}
+        </div>
       </div>
     );
   }
