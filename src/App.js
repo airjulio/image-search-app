@@ -121,12 +121,15 @@ class App extends Component {
       return (<p>{this.state.barcodeResult}</p>);
     } else if (this.state.pictureResult) {
       return (
-          <ul>
-            {this.state.pictureResult.map(item => {
-              return <li>{item}</li>
-            })}
-          </ul>
+          <p>{this.state.pictureResult}</p>
       );
+      // return (
+      //     <ul>
+      //       {this.state.pictureResult.map(item => {
+      //         return <li>{item}</li>
+      //       })}
+      //     </ul>
+      // );
     }
   }
 
