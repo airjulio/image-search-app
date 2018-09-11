@@ -67,7 +67,7 @@ class App extends Component {
     })
       .then((response) =>
         response.json().then((body) => {
-          console.log('body', body);
+          console.log('body', body.result);
           this.setState({ pictureResult: body.result });
         }),
       )
@@ -79,7 +79,6 @@ class App extends Component {
     const formData = new FormData();
     formData.append('file', img);
     fetch('https://imagesearch.adeptmind.ai/barcode', {
-      //   fetch('http://localhost:5001/barcode', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       body: formData,
@@ -87,10 +86,25 @@ class App extends Component {
       .then((response) =>
         response.json().then((body) => {
           console.log('body', body);
-          this.setState({ barCodeResult: body.result });
+          this.barcodeSearch(body.result);
+          // this.setState({ barCodeResult: body.result });
         }),
       )
       .catch((error) => console.error('Error:', error));
+  }
+
+  barcodeSearch(barcodeStr) {
+    fetch('https://imagesearch.adeptmind.ai/barcodeSearch', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      body: {'barcode': barcodeStr},
+    })
+        .then((response) =>
+            response.json().then((body) => {
+              console.log('body', body);
+            }),
+        )
+        .catch((error) => console.error('Error:', error));
   }
 
   onTakePhoto(dataUri) {
@@ -170,7 +184,7 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        <div>{this.showResult()}</div>
+        {/*<div>{this.showResult()}</div>*/}
       </div>
     );
   }
