@@ -24,7 +24,6 @@ class App extends Component {
     this.handleBarcodeChange = this.handleBarcodeChange.bind(this);
     this.handlePicChange = this.handlePicChange.bind(this);
     this.showBarcode = this.showBarcode.bind(this);
-    this.showPicture = this.showPicture.bind(this);
     this.showResult = this.showResult.bind(this);
     this._onDetected = this._onDetected.bind(this);
     this._scan = this._scan.bind(this);
