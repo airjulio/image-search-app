@@ -40,12 +40,12 @@ class App extends Component {
 
   handlePicChange(evt) {
     this.pictureService(
-      this.barUpload.files[0],
+      this.picUpload.files[0],
       'https://imagesearch.adeptmind.ai/image',
       this.showPicture,
     );
     this.setState({
-      file: URL.createObjectURL(this.barUpload.files[0]),
+      file: URL.createObjectURL(this.picUpload.files[0]),
     });
   }
 
