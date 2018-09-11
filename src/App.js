@@ -120,18 +120,20 @@ class App extends Component {
   }
 
   showResult() {
-    console.log('state', this.state);
-    if (this.state.barCodeResult) {
-      return (<p>{this.state.barcodeResult}</p>);
-    } else if (this.state.pictureResult) {
-      return (
-          <ul>
-            {this.state.pictureResult.map(item => {
-              return <li>{item}</li>
-            })}
-          </ul>
-      );
-    }
+    console.log('state', {
+        ...this.state
+    });
+    // if (this.state.barCodeResult) {
+    //   return (<p>{this.state.barcodeResult}</p>);
+    // } else if (this.state.pictureResult) {
+    //   return (
+    //       <ul>
+    //         {this.state.pictureResult.map(item => {
+    //           return <li>{item}</li>
+    //         })}
+    //       </ul>
+    //   );
+    // }
   }
 
   render() {
@@ -171,9 +173,9 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        {/*<div>*/}
-          {/*{this.showResult()}*/}
-        {/*</div>*/}
+        <div>
+          {this.showResult()}
+        </div>
       </div>
     );
   }
