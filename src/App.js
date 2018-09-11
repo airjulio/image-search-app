@@ -42,7 +42,6 @@ class App extends Component {
     this.pictureService(
       this.picUpload.files[0],
       'https://imagesearch.adeptmind.ai/image',
-      this.showPicture,
     );
     this.setState({
       file: URL.createObjectURL(this.picUpload.files[0]),
@@ -56,15 +55,8 @@ class App extends Component {
     });
   }
 
-  showPicture(response) {
-    console.log('HERE', this);
-    response.json().then((body) => {
-      console.log('BODY', body);
-      this.setState({ pictureResult: body.result });
-    });
-  }
 
-  pictureService(img, url, callback) {
+  pictureService(img, url) {
     this.setState({ pictureResult: 'Analyzing image...' });
     const formData = new FormData();
     formData.append('file', img);
@@ -74,7 +66,12 @@ class App extends Component {
       mode: 'cors', // no-cors, cors, *same-origin
       body: formData,
     })
-      .then((response) => callback(response))
+      .then((response) =>
+        response.json().then((body) => {
+          console.log('body', body);
+          this.setState({ pictureResult: body.result });
+        }),
+      )
       .catch((error) => console.error('Error:', error));
   }
 
@@ -83,7 +80,7 @@ class App extends Component {
     const formData = new FormData();
     formData.append('file', img);
     fetch('https://imagesearch.adeptmind.ai/barcode', {
-    //   fetch('http://localhost:5001/barcode', {
+      //   fetch('http://localhost:5001/barcode', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       body: formData,
@@ -122,17 +119,17 @@ class App extends Component {
 
   showResult() {
     console.log('state', {
-        ...this.state
+      ...this.state,
     });
     if (this.state.barCodeResult) {
-      return (<p>{this.state.barcodeResult}</p>);
+      return <p>{this.state.barcodeResult}</p>;
     } else if (this.state.pictureResult) {
       return (
-          <ul>
-            {this.state.pictureResult.map(item => {
-              return <li>{item}</li>
-            })}
-          </ul>
+        <ul>
+          {this.state.pictureResult.map((item) => {
+            return <li>{item}</li>;
+          })}
+        </ul>
       );
     }
   }
@@ -174,9 +171,7 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        <div>
-          {this.showResult()}
-        </div>
+        <div>{this.showResult()}</div>
       </div>
     );
   }
