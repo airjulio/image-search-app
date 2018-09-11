@@ -81,8 +81,8 @@ class App extends Component {
     this.setState({ barCodeResult: 'Analysing image...' });
     const formData = new FormData();
     formData.append('file', img);
-    fetch('https://imagesearch.adeptmind.ai/barcode', {
-      // fetch('http://localhost:5000/barcode', {
+    // fetch('https://imagesearch.adeptmind.ai/barcode', {
+      fetch('http://localhost:5001/barcode', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       body: formData,
@@ -90,7 +90,7 @@ class App extends Component {
       .then((response) =>
         response.json().then((body) => {
           console.log(`BODY: ${JSON.stringify(body)}`);
-          this.setState({ barCodeResult: body.result });
+          this.setState(() => ({ barCodeResult: body.result }));
         }),
       )
       .catch((error) => console.error('Error:', error));
