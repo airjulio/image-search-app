@@ -48,14 +48,14 @@ class App extends Component {
 
   showBarcode(response) {
     response.json().then((body) => {
-      console.log(`BODY: ${JSON.stringify(body)}`);
+      console.log('BODY', body);
       this.setState({ barCodeResult: body.result });
     });
   }
 
   showPicture(response) {
     response.json().then((body) => {
-      console.log(`BODY: ${JSON.stringify(body)}`);
+      console.log('BODY', body);
       this.setState(()=>({ pictureResult: body.result }));
     });
   }
@@ -117,6 +117,7 @@ class App extends Component {
   }
 
   showResult() {
+    console.log('state', this.state);
     if (this.state.barCodeResult) {
       return (<p>{this.state.barcodeResult}</p>);
     } else if (this.state.pictureResult) {
