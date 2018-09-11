@@ -23,6 +23,7 @@ class App extends Component {
     this.handlePicChange = this.handlePicChange.bind(this);
     this.showBarcode = this.showBarcode.bind(this);
     this.showPicture = this.showPicture.bind(this);
+    this.showResult = this.showResult.bind(this);
     this._onDetected = this._onDetected.bind(this);
     this._scan = this._scan.bind(this);
   }
@@ -115,6 +116,20 @@ class App extends Component {
       }); // always check for errors at the end.
   }
 
+  showResult() {
+    if (this.state.barCodeResult) {
+      return (<p>{this.state.barcodeResult}</p>);
+    } else if (this.state.pictureResult) {
+      return (
+          <ul>
+            {this.state.pictureResult.map(item => {
+              return <li>{item}</li>
+            })}
+          </ul>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -153,15 +168,7 @@ class App extends Component {
           <img className="App-picture" src={this.state.file} />
         </div>
         <div>
-          if (this.state.barCodeResult) {
-          <p>{this.state.barcodeResult}</p>
-        } else if (this.state.pictureResult) {
-            <ul>
-              {this.state.pictureResult.map(item => {
-                return <li>{item}</li>
-              })}
-            </ul>
-        }
+          {this.showResult()}
         </div>
       </div>
     );
