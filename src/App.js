@@ -22,6 +22,7 @@ class App extends Component {
     this.handleBarcodeChange = this.handleBarcodeChange.bind(this);
     this.handlePicChange = this.handlePicChange.bind(this);
     this.showBarcode = this.showBarcode.bind(this);
+    this.showPicture = this.showPicture.bind(this);
     this._onDetected = this._onDetected.bind(this);
     this._scan = this._scan.bind(this);
   }
@@ -37,7 +38,7 @@ class App extends Component {
     this.pictureService(
       this.fileUpload.files[0],
       'https://imagesearch.adeptmind.ai/image',
-      this.showBarcode,
+      this.showPicture,
     );
     this.setState({
       file: URL.createObjectURL(this.fileUpload.files[0]),
@@ -51,8 +52,15 @@ class App extends Component {
     });
   }
 
+  showPicture(response) {
+    response.json().then((body) => {
+      console.log(`BODY: ${JSON.stringify(body)}`);
+      this.setState({ pictureResult: body.result });
+    });
+  }
+
   pictureService(img, url, callback) {
-    this.setState({ barCodeResult: 'Analysing image...' });
+    this.setState({ pictureResult: 'Analysing image...' });
     const formData = new FormData();
     formData.append('file', img);
     fetch(url, {
@@ -145,7 +153,15 @@ class App extends Component {
           <img className="App-picture" src={this.state.file} />
         </div>
         <div>
-          <p>{this.state.barCodeResult}</p>
+          if (this.state.barCodeResult) {
+          <p>{this.state.barcodeResult}</p>
+        } else if (this.state.pictureResult) {
+            <ul>
+              {this.state.pictureResult.map(item => {
+                return <li>{item}</li>
+              })}
+            </ul>
+        }
         </div>
       </div>
     );
