@@ -18,6 +18,8 @@ class App extends Component {
     this.state = {
       file: null,
       scanning: false,
+      pictureResult: [],
+      barCodeResult: '',
     };
     this.handleBarcodeChange = this.handleBarcodeChange.bind(this);
     this.handlePicChange = this.handlePicChange.bind(this);
@@ -54,6 +56,7 @@ class App extends Component {
   }
 
   showPicture(response) {
+    console.log('HERE', this);
     response.json().then((body) => {
       console.log('BODY', body);
       this.setState(()=>({ pictureResult: body.result }));
@@ -168,9 +171,9 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        <div>
-          {this.showResult()}
-        </div>
+        {/*<div>*/}
+          {/*{this.showResult()}*/}
+        {/*</div>*/}
       </div>
     );
   }
