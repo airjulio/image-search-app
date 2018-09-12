@@ -31,6 +31,13 @@
 .barcodeIcon {
   font-size:48px;
   color: darkmagenta;
+  padding: 20px;
+}
+
+.shirtIcon {
+  font-size: 48px;
+  color: darkmagenta;
+  padding: 20px;
 }
 
 .inputfile {
