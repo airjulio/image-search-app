@@ -160,13 +160,15 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        <Lightbox
-            images={this.state.pictureResult}
-            // isOpen={this.state.lightboxIsOpen}
-            // onClickPrev={this.gotoPrevious}
-            // onClickNext={this.gotoNext}
-            // onClose={this.closeLightbox}
-        />
+        {Array.isArray(this.state.pictureResult) && this.state.pictureResult.length > 0 && (
+            <Lightbox
+              images={this.state.pictureResult}
+              // isOpen={this.state.lightboxIsOpen}
+              // onClickPrev={this.gotoPrevious}
+              // onClickNext={this.gotoNext}
+              // onClose={this.closeLightbox}
+          />
+        )}
       </div>
     );
   }
