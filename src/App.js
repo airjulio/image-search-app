@@ -6,8 +6,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarcode, faTshirt } from '@fortawesome/free-solid-svg-icons';
 
-import Lightbox from 'react-images';
-
+// import Lightbox from 'react-images';
+const Img = require('react-image');
 
 library.add(faBarcode);
 library.add(faTshirt);
@@ -161,13 +161,7 @@ class App extends Component {
           <img className="App-picture" src={this.state.file} />
         </div>
         {Array.isArray(this.state.pictureResult) && this.state.pictureResult.length > 0 && (
-            <Lightbox
-              images={this.state.pictureResult}
-              // isOpen={this.state.lightboxIsOpen}
-              // onClickPrev={this.gotoPrevious}
-              // onClickNext={this.gotoNext}
-              onClose={() => {console.log(this)}}
-          />
+            <Img src={this.state.pictureResult} />
         )}
       </div>
     );
