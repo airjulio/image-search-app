@@ -6,6 +6,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarcode, faTshirt } from '@fortawesome/free-solid-svg-icons';
 
+const ImageList = require('react-image-list');
+
+
 library.add(faBarcode);
 library.add(faTshirt);
 
@@ -109,6 +112,7 @@ class App extends Component {
   }
 
   showProducts(products) {
+
     return (
         <div>
           {products.map((item) => {
@@ -155,8 +159,12 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        {/*<div>{this.showResult()}</div>*/}
-        {this.showProducts(this.state.pictureResult)}
+        <div>
+          <ImageList imageData={this.state.pictureResult}
+                     wrapperClass="wrapper"
+                     gridClass="col-md-3"
+                     imgClass="responsive"/>
+        </div>
       </div>
     );
   }
