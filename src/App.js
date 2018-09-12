@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-// import Camera from 'react-html5-camera-photo';
-import Scanner from './Scanner';
-import Result from './Result';
 import logo from './logo.svg';
 import './App.css';
 
@@ -85,49 +82,11 @@ class App extends Component {
     })
       .then((response) =>
         response.json().then((body) => {
-          console.log('body', body);
-          this.barcodeSearch(body.result);
+          console.log('body', body.result);
           // this.setState({ barCodeResult: body.result });
         }),
       )
       .catch((error) => console.error('Error:', error));
-  }
-
-  barcodeSearch(barcodeStr) {
-    fetch('https://imagesearch.adeptmind.ai/barcodeSearch', {
-      method: 'POST',
-      mode: 'cors', // no-cors, cors, *same-origin
-      body: JSON.stringify({'barcode': barcodeStr}),
-    })
-        .then((response) =>
-            response.json().then((body) => {
-              console.log('body', body);
-            }),
-        )
-        .catch((error) => console.error('Error:', error));
-  }
-
-  onTakePhoto(dataUri) {
-    // Do stuff with the dataUri photo...
-    console.log(`takePhoto: ${dataUri}`);
-  }
-
-  askForMediaAccess() {
-    const constraints = { audio: true, video: { width: 1280, height: 720 } };
-
-    navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then(function(mediaStream) {
-        // var video = document.querySelector('video');
-        // video.srcObject = mediaStream;
-        // video.onloadedmetadata = function(e) {
-        //   video.play();
-        // };
-        this._scan();
-      })
-      .catch(function(err) {
-        console.log(err.name + ': ' + err.message);
-      }); // always check for errors at the end.
   }
 
   showResult() {
