@@ -113,7 +113,6 @@ class App extends Component {
   }
 
   showProducts(products) {
-
     return (
         <div>
           {products.map((item) => {
@@ -160,10 +159,9 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        {/*{Array.isArray(this.state.pictureResult) && this.state.pictureResult.length > 0 && (*/}
-            {/*<Img src={this.state.pictureResult} />*/}
-        {/*)}*/}
-        {<Img src={this.state.pictureResult} />}
+        <div>
+          <Img src={this.state.pictureResult} className="profile-image"/>
+        </div>
       </div>
     );
   }
