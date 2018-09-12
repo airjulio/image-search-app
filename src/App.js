@@ -160,9 +160,10 @@ class App extends Component {
         <div>
           <img className="App-picture" src={this.state.file} />
         </div>
-        {Array.isArray(this.state.pictureResult) && this.state.pictureResult.length > 0 && (
-            <Img src={this.state.pictureResult} />
-        )}
+        {/*{Array.isArray(this.state.pictureResult) && this.state.pictureResult.length > 0 && (*/}
+            {/*<Img src={this.state.pictureResult} />*/}
+        {/*)}*/}
+        {<Img src={this.state.pictureResult} />}
       </div>
     );
   }
