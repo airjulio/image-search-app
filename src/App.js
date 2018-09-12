@@ -66,6 +66,7 @@ class App extends Component {
         response.json().then((body) => {
           console.log('body', body.result);
           this.setState({ pictureResult: body.result });
+          console.log(this);
         }),
       )
       .catch((error) => console.error('Error:', error));
@@ -144,6 +145,7 @@ class App extends Component {
           <img className="App-picture" src={this.state.file} />
         </div>
         {/*<div>{this.showResult()}</div>*/}
+        <img className="products" src={this.state.pictureResult} />
       </div>
     );
   }
