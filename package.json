@@ -12,6 +12,7 @@
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-html5-camera-photo": "^1.2.8-beta.0",
+    "react-images": "^0.5.19",
     "react-scripts": "1.1.5"
   },
   "scripts": {
