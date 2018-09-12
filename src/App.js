@@ -70,6 +70,7 @@ class App extends Component {
         response.json().then((body) => {
           console.log('body', body.result);
           this.setState({ pictureResult: body.result });
+          this.setState({ lightboxIsOpen: true });
           console.log(this);
         }),
       )
@@ -161,7 +162,7 @@ class App extends Component {
         </div>
         <Lightbox
             images={this.state.pictureResult}
-            isOpen={true}
+            // isOpen={this.state.lightboxIsOpen}
             // onClickPrev={this.gotoPrevious}
             // onClickNext={this.gotoNext}
             // onClose={this.closeLightbox}
