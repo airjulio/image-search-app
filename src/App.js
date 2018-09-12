@@ -22,6 +22,7 @@ class App extends Component {
     this.handlePicChange = this.handlePicChange.bind(this);
     this.showBarcode = this.showBarcode.bind(this);
     this.showResult = this.showResult.bind(this);
+    this.showProducts = this.showProducts.bind(this);
     this._onDetected = this._onDetected.bind(this);
     this._scan = this._scan.bind(this);
   }
@@ -107,6 +108,16 @@ class App extends Component {
     }
   }
 
+  showProducts(products) {
+    return (
+        <div>
+          {products.map((item) => {
+            return <img className="App-product" src={item} />;
+          })}
+        </div>
+    );
+  }
+
   render() {
     return (
       <div className="App">
@@ -145,7 +156,7 @@ class App extends Component {
           <img className="App-picture" src={this.state.file} />
         </div>
         {/*<div>{this.showResult()}</div>*/}
-        <img className="products" src={this.state.pictureResult} />
+        {this.showProducts(this.state.pictureResult)}
       </div>
     );
   }
